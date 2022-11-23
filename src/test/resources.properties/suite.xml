@@ -6,7 +6,7 @@
     </listeners>
 <!--    <parameter name="url" value="https://www.espnqa.com/?src=com/&amp;_adblock=true&amp;espn=cloud"/>-->
     <test name="API Tests">
-        <parameter name="browser" value="chrome"/>
+<!--        <parameter name="browser" value="chrome"/>-->
         <classes>
 <!--            <class name="org.espn.tests.HomeTest"/>-->
 <!--            <class name="org.espn.tests.LogOutTest"/>-->
