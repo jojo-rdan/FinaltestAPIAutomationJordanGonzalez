@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 
 public class DataInitializer {
     public static Bank loadBank(){
-        Bank bank = new Bank("API Bank");
+        Bank bank = new Bank();
         loadUsersIntoBank(bank);
         return bank;
     }

@@ -5,11 +5,9 @@ import java.util.List;
 
 public class Bank {
 
-    private String name;
     private List<User> users;
 
-    public Bank(String name) {
-        this.name = name;
+    public Bank() {
         this.users = new ArrayList<>();
     }
 
