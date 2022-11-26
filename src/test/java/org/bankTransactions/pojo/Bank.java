@@ -5,15 +5,20 @@ import java.util.List;
 
 public class Bank {
 
-    private String name;
     private List<User> users;
 
-    public Bank(String name) {
-        this.name = name;
+    public Bank() {
         this.users = new ArrayList<>();
     }
 
     public void registerUser(User user){
         this.users.add(user);
+    }
+    public void removeUser(User user){
+        this.users.remove(user);
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }
