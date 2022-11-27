@@ -33,4 +33,7 @@ public class User {
         this.accountNumber = accountNumber;
     }
 
+    public String getEmail() {
+        return email;
+    }
 }

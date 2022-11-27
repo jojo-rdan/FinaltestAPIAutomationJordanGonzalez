@@ -1,16 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Test suite ESPN">
+<suite name="API Test suite">
     <listeners>
-<!--        <listener class-name="org.espn.utils.Listener"/>-->
+        <listener class-name="org.bankTransactions.utils.Listener"/>
     </listeners>
-<!--    <parameter name="url" value="https://www.espnqa.com/?src=com/&amp;_adblock=true&amp;espn=cloud"/>-->
     <test name="API Tests">
-<!--        <parameter name="browser" value="chrome"/>-->
         <classes>
-<!--            <class name="org.espn.tests.HomeTest"/>-->
-<!--            <class name="org.espn.tests.LogOutTest"/>-->
-<!--            <class name="org.espn.tests.DeactivateTest"/>-->
+            <class name="org.bankTransactions.test.EndPointVerificationTest"/>
+            <class name="org.bankTransactions.test.InitializeDataAndPostTest"/>
+            <class name="org.bankTransactions.test.GetUsersWithEmailAssertion"/>
+            <class name="org.bankTransactions.test.UpdateExistingAccountTest"/>
         </classes>
     </test>
 </suite>
