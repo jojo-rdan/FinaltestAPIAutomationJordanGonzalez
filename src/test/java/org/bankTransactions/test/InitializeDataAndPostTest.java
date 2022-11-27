@@ -11,6 +11,11 @@ import java.util.Objects;
 
 public class InitializeDataAndPostTest {
     Logger log = Logger.getLogger(InitializeDataAndPostTest.class);
+
+    /**
+     * @author Jordan.González
+     * Post users and validate if there is no duplicate email's.
+     */
     @Test
     public void postDataTest(){
         log.info("Initialize users data");
