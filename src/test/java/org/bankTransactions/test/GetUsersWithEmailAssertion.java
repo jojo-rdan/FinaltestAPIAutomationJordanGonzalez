@@ -12,7 +12,7 @@ public class GetUsersWithEmailAssertion {
      */
     @Test
     public void getUsersNoEmailDuplicates(){
-        log.info("Getting users..");
+        log.info("Getting users.");
         log.info("Validate that users don´t have duplicate email's");
         APIHandler.getUsers();
     }

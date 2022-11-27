@@ -1,10 +1,12 @@
 package org.bankTransactions.API;
 
+import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.bankTransactions.pojo.Bank;
 import org.bankTransactions.pojo.DataInitializer;
 import org.hamcrest.MatcherAssert;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -22,13 +24,15 @@ public class APIHandler {
         Bank myBank = DataInitializer.loadBank();
         Response response = given().contentType("application/json").when().get("https://637d740b9c2635df8f8751d2.mockapi.io/users");
         List<String> usersEmails = response.jsonPath().get("email");
-        for (int i = 0; i < myBank.getUsers().size(); i++) {
-            for (int j = 1; j < myBank.getUsers().size(); j++) {
-                MatcherAssert.assertThat(String.valueOf(usersEmails.get(i).equals(usersEmails.get(j))), true);
-            }
-        }
         response.then().extract().response();
         response.then().statusCode(HttpStatus.SC_OK);
+
+        for (int i = 0; i < myBank.getUsers().size(); i++) {
+            for (int j = i+1; j < usersEmails.size(); j++) {
+                Assert.assertNotEquals(myBank.getUsers().get(i).getEmail(), usersEmails.get(j));
+            }
+        }
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     /**
@@ -39,11 +43,21 @@ public class APIHandler {
     public static void postUsers(){
         Bank myBank = DataInitializer.loadBank();
         Response response = given().contentType("application/json").when().get("https://637d740b9c2635df8f8751d2.mockapi.io/users");
+        List<String> usersEmails = response.jsonPath().get("email");
+
         for (int i = 0; i < myBank.getUsers().size(); i++) {
             response = given().contentType("application/json").body(myBank.getUsers().get(i)).when().post("https://637d740b9c2635df8f8751d2.mockapi.io/users");
         }
+
+        for (int i = 0; i < myBank.getUsers().size(); i++) {
+            for (int j = i+1; j < usersEmails.size(); j++) {
+                Assert.assertNotEquals(myBank.getUsers().get(i).getEmail(), usersEmails.get(j));
+            }
+        }
         response.then().extract().response();
         response.then().statusCode(HttpStatus.SC_CREATED);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.SC_CREATED);
     }
 
     /**
@@ -52,12 +66,16 @@ public class APIHandler {
      * @author Jordan.González
      */
     public static void updateUser(){
+        Faker fakerData = Faker.instance();
         Bank myBank = DataInitializer.loadBank();
-        myBank.getUsers().get(1).setAccountNumber(123456);
+        myBank.getUsers().get(1).setAccountNumber(fakerData.number().numberBetween(0, 1000));
+
         Response response = given().contentType("application/json").body(myBank.getUsers().get(1)).when().put("https://637d740b9c2635df8f8751d2.mockapi.io/users/1");
         response.then().extract().response();
         response.prettyPrint();
         response.then().statusCode(HttpStatus.SC_OK);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     /**
@@ -75,5 +93,7 @@ public class APIHandler {
         }
         response.then().extract().response();
         response.then().statusCode(HttpStatus.SC_OK);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
     }
 }
