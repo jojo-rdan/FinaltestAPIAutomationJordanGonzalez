@@ -10,3 +10,10 @@ This new project contains:<br>
 ■ Make the GET request, asserting that there are not duplicate email accounts.<br>
 ■ Update an existing AccountNumber.<br>
 </ul>
+<h3>To run the project</h3>
+<ul>
+  <li>Clone the repository</li>
+  <li>Go to the Suite file, this is the path: "src/test/resources.properties/suite.xml"</li>
+  <li>Open the suite.xml file and right click on it</li>
+  <li>Click on "Run" option to initialize the test cases</li>
+</ul>
