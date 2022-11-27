@@ -3,11 +3,23 @@ package org.bankTransactions.pojo;
 import com.github.javafaker.Faker;
 
 public class DataInitializer {
+
+    /**
+     * Create a bank and load users
+     *
+     * @author Jordan.González
+     */
     public static Bank loadBank(){
         Bank bank = new Bank();
         loadUsersIntoBank(bank);
         return bank;
     }
+
+    /**
+     * Creates users for the bank
+     *
+     * @author Jordan.González
+     */
     public static void loadUsersIntoBank(Bank bank){
         Faker fakerData = Faker.instance();
         User user1 = new User(fakerData.name().firstName(),

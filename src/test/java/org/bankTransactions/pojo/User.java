@@ -13,6 +13,20 @@ public class User {
     private String country;
     private String telephone;
 
+    /**
+     * Constructor method for a User.
+     *
+     * @param name : name
+     * @param lastName : lastName
+     * @param accountNumber : accountNumber
+     * @param amount : amount
+     * @param transactionType : transactionType
+     * @param email : email
+     * @param active : active
+     * @param country : country
+     * @param telephone : telephone
+     * @author Jordan.González
+     */
     public User(String name, String lastName, int accountNumber, float amount, String transactionType, String email, boolean active, String country, String telephone) {
         this.name = name;
         this.lastName = lastName;
@@ -23,10 +37,6 @@ public class User {
         this.active = active;
         this.country = country;
         this.telephone = telephone;
-    }
-
-    public int getAccountNumber() {
-        return accountNumber;
     }
 
     public void setAccountNumber(int accountNumber) {

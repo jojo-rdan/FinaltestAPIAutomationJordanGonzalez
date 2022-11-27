@@ -12,18 +12,30 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
 public class APIHandler {
+
+    /**
+     * Get users and make a validation for duplicate emails
+     *
+     * @author Jordan.González
+     */
     public static void getUsers(){
         Bank myBank = DataInitializer.loadBank();
         Response response = given().contentType("application/json").when().get("https://637d740b9c2635df8f8751d2.mockapi.io/users");
         List<String> usersEmails = response.jsonPath().get("email");
         for (int i = 0; i < myBank.getUsers().size(); i++) {
-            for (int j = 1; j < usersEmails.size(); j++) {
+            for (int j = 1; j < myBank.getUsers().size(); j++) {
                 MatcherAssert.assertThat(String.valueOf(usersEmails.get(i).equals(usersEmails.get(j))), true);
             }
         }
         response.then().extract().response();
         response.then().statusCode(HttpStatus.SC_OK);
     }
+
+    /**
+     * Post users in the mock API endpoint
+     *
+     * @author Jordan.González
+     */
     public static void postUsers(){
         Bank myBank = DataInitializer.loadBank();
         Response response = given().contentType("application/json").when().get("https://637d740b9c2635df8f8751d2.mockapi.io/users");
@@ -33,14 +45,26 @@ public class APIHandler {
         response.then().extract().response();
         response.then().statusCode(HttpStatus.SC_CREATED);
     }
+
+    /**
+     * Update a given user in the mock API endpoint
+     *
+     * @author Jordan.González
+     */
     public static void updateUser(){
         Bank myBank = DataInitializer.loadBank();
-        myBank.getUsers().get(1).setAccountNumber(123457);
+        myBank.getUsers().get(1).setAccountNumber(123456);
         Response response = given().contentType("application/json").body(myBank.getUsers().get(1)).when().put("https://637d740b9c2635df8f8751d2.mockapi.io/users/1");
         response.then().extract().response();
         response.prettyPrint();
         response.then().statusCode(HttpStatus.SC_OK);
     }
+
+    /**
+     * Delete users in the mock API endpoint, validates if it is empty or not
+     *
+     * @author Jordan.González
+     */
     public static void deleteAllUsers(){
         Bank myBank = DataInitializer.loadBank();
         Response response = given().contentType("application/json").when().get("https://637d740b9c2635df8f8751d2.mockapi.io/users");
